@@ -1,4 +1,4 @@
-## Projeto para automação de Criação de servidores DNS
+# Projeto para automação de Criação de servidores DNS
 
 ## Configurando interface de rede
 
@@ -16,18 +16,18 @@ nmcli connection modify LAN ipv4.address 192.168.124.20/24 ipv4.gateway 192.168.
 nmcli connection down LAN && cmcli connection up LAN 
 ```
 
-## Adicionar chave ssh ao servidor 
+# Adicionar chave ssh ao servidor 
 
-# Lembre-se que esta etapa é feita a partir do servidor Ansible
+## Lembre-se que esta etapa é feita a partir do servidor Ansible
 
 ```bash
 #Enviar chave para o servidor alvo
 ssh-copy-id <user>@192.168.124.20
 ```
 
-## Aplicando Playbook para provisionamento do DNS 
+# Aplicando Playbook para provisionamento do DNS 
 
-# Lembre-se que esse servidor vem com configurações padrões para o "meu domínio".Alterar para o seu caso
+## Lembre-se que esse servidor vem com configurações padrões para o "meu domínio".Alterar para o seu caso
 
 ```bash
 #Criando diretório raiz
