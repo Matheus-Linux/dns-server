@@ -37,7 +37,7 @@ mkdir /opt/bind9
 cd /opt/bind9
 
 #Clonar repositório com o projeto
-
+git clone https://github.com/Matheus-Linux/dns-server.git
 ```
 
 # Topologia do ambiente
