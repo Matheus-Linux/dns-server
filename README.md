@@ -40,3 +40,9 @@ cd /opt/bind9
 
 ```
 
+# Topologia do ambiente
+
+![Arquitetura do ambiente](https://github.com/Matheus-Linux/dns-server/issues/1#issue-2761115908)
+
+
+
