@@ -10,7 +10,7 @@ nmcli connection del enp1s0
 nmcli connection add con-name LAN type ethernet ifname enp1s0
 
 #Adicionando endereçamento IP
-nmcli connection modify LAN ipv4.address 192.168.124.20/24 ipv4.gateway 192.168.124.1 ipv4.method manual
+nmcli connection modify LAN ipv4.address 192.168.124.10/24 ipv4.gateway 192.168.124.1 ipv4.method manual
 
 #Reinicializando configurações
 nmcli connection down LAN && cmcli connection up LAN 
@@ -22,7 +22,7 @@ nmcli connection down LAN && cmcli connection up LAN
 
 ```bash
 #Enviar chave para o servidor alvo
-ssh-copy-id <user>@192.168.124.20
+ssh-copy-id <user>@192.168.124.10
 ```
 
 # Aplicando Playbook para provisionamento do DNS 
