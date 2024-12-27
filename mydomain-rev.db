@@ -1,0 +1,30 @@
+$TTL 4H
+@	IN 	SOA	ns1.mydomain.com.br.	admin.tuxcompany.com.br. (
+				  20241220	; serial
+				       12H	; refresh
+				       30M	; retry
+					1W	; expire
+					2H )	; minimum
+
+@	IN	NS	ns1.mydomain.com.br.
+@	IN	NS	ns2.mydomain.com.br.
+@	IN	NS	ns3.mydomain.com.br.
+@	IN	MX	5	srvsmtp01.mydomain.com.br.
+@	IN	MX	5	srvsmtp02.mydomain.com.br.
+@	IN	MX	5	srvsmtp03.mydomain.com.br.
+@	IN	TXT	"v=spf1 ip4:192.168.124.30 ip4:192.168.124.31 ip4:192.168.124.32 -all"
+
+
+10	IN	PTR	ns1.mydomain.com.br.
+11	IN	PTR	ns2.mydomain.com.br.
+12	IN	PTR	ns3.mydomain.com.br.
+20	IN	PTR	ldapsrv01.mydomain.com.br.
+21	IN	PTR	ldapsrv02.mydomain.com.br.
+22	IN	PTR	mydomainldp.mydomain.com.br.
+30	IN	PTR	srvsmtp01.mydomain.com.br.
+31	IN	PTR	srvsmtp02.mydomain.com.br.
+32	IN	PTR	srvsmtp03.mydomain.com.br.
+12	IN	PTR	www.mydomain.com.br.	
+12	IN	PTR	www1.mydomain.com.br.	
+12	IN	PTR	www2.mydomain.com.br.	
+12	IN	PTR	www3.mydomain.com.br.

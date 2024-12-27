@@ -1,0 +1,75 @@
+---
+- name: Playbook criação servidor DNS...
+  hosts: SERVER
+  user: matheus
+  become: true
+  become_user: root
+  vars:
+    CONF: /opt/Project/dnsserver/named.conf 
+  tasks:
+    - name: Adicionando hostname...
+      ansible.builtin.hostname:
+        name: srvdnsprd01
+    - name: Instalação de pacotes essenciais...
+      ansible.builtin.yum:
+        name:
+          - epel-release
+          - net-tools 
+          - sysstat
+          - lsof
+          - bind
+    - name: Adicionando configurações globais...
+      ansible.builtin.copy:
+        src: "{{CONF}}"
+        dest: /etc/named.conf
+        owner: root
+        group: root
+        mode: '644'
+        remote_src: false
+    - name: Criando diretório de zonas...
+      ansible.builtin.file:
+        path: /var/named/zones
+        state: directory
+        owner: named
+        group: named
+    - name: Adicionando arquivos de registros...
+      ansible.builtin.copy:
+        src: "/opt/Project/dnsserver/{{item}}"
+        dest: /var/named/zones/
+        owner: named
+        group: named
+      with_items:
+        - mydomain.db
+        - mydomain-rev.db
+    - name: Modificando arquivo resolv.conf ...
+      ansible.builtin.lineinfile:
+        path: /etc/resolv.conf
+        regexp: '^search\s[a-z]+'
+        line: 'search mydomain.com.br'
+    - name: Adicionando IP dns...
+      ansible.builtin.lineinfile:
+        path: /etc/resolv.conf
+        regexp: '^nameserver\s[0-9\.]+'
+        line: 'nameserver 192.168.124.10'
+    - name: Inicializando serviço do Bind9...
+      ansible.builtin.systemd_service:
+        name: named
+        state: started
+        enabled: true
+        masked: no
+    - name: Inicializando Firewalld...
+      ansible.builtin.systemd_service:
+        name: firewalld
+        state: started
+        enabled: true
+        masked: no
+    - name: Habilitando regras de firewall...
+      ansible.posix.firewalld:
+        service: "{{item}}"
+        stated: enabled
+        permanent: true
+        zone: public
+        ignore_errors: yes
+      loop:
+        - dns
+        - ssh
