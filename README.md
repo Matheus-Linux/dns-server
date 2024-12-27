@@ -38,6 +38,9 @@ cd /opt/bind9
 
 #Clonar repositório com o projeto
 git clone https://github.com/Matheus-Linux/dns-server.git
+
+#Aplicar configurações
+ansible-playbook <yaml configfile>.yaml -i nodes.yaml 
 ```
 
 # Topologia do ambiente
